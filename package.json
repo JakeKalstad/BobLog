@@ -1,0 +1,16 @@
+{
+  "name": "BogLog",
+  "version": "0.0.0",
+  "description": "Logging package for nodejs",
+  "main": "bog_log.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "log",
+    "logging",
+    "logger"
+  ],
+  "author": "Jake Kalstad",
+  "license": "BSD-2-Clause"
+}
