@@ -2,7 +2,7 @@
   "name": "BogLog",
   "version": "0.0.0",
   "description": "Logging package for nodejs",
-  "main": "bog_log.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -11,6 +11,10 @@
     "logging",
     "logger"
   ],
+    "repository": {
+    "type": "git",
+    "url": "git://github.com/JakeKalstad/BobLog.git"
+  }, 
   "author": "Jake Kalstad",
   "license": "BSD-2-Clause"
 }
