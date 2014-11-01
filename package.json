@@ -1,6 +1,6 @@
 {
   "name": "boblog",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Logging package for nodejs",
   "main": "index.js",
   "scripts": {
