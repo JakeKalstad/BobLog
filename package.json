@@ -1,6 +1,6 @@
 {
   "name": "boblog",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Logging package for nodejs",
   "main": "index.js",
   "scripts": {
@@ -16,5 +16,9 @@
     "url": "git://github.com/JakeKalstad/BobLog.git"
   }, 
   "author": "Jake Kalstad",
-  "license": "BSD-2-Clause"
+  "license": "BSD-2-Clause",
+    "dependencies" : {
+     "mailer": ">= 0.6.7",
+     "stack-trace" : ">= 0.0.9"
+    }
 }
