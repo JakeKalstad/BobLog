@@ -3,10 +3,14 @@ var path = require('path');
 function Logger() {
     'use strict';
     this.options = null;
+    function formatMsg(msg) {
+        var now = new Date();
+        return now.toString() + msg + "\n";
+    }
     this.Log = function (msg) {
         var locpath = path.dirname(require.main.filename) ;
         console.log(locpath );
-        fs.writeFile(path.dirname(require.main.filename) + "/log.bob", msg, function (err) {
+        fs.appendFile(path.dirname(require.main.filename) + "/log.bob", formatMsg(msg), function (err) {
             if (err) {
                 console.log(err);
             }
