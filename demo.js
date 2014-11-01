@@ -1,4 +1,4 @@
-var bobLog = require('boblog');
+var bobLog = require('./');
 
 function testError() {
 	bobLog.error("Uh oh, an error occurred..");

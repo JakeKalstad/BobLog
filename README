@@ -2,17 +2,21 @@ BobLog
 =========
 
 A small library providing logging essentials
+Allows for smtp, console and file logging with time, date, file and function call along with user defined messages.
+The dream is a swiss army knife that will be the one stop shop for logging, as well as a simple interface.
 
 ## Installation
 
   npm install boblog
 
 ## Usage
-
+    var logger = require('boblog');
+    logger.error("Something went hay wire!");
+    logger.debug("Something fishy going on here...");
 ## Contributing
 
     Don't be a jerk
 
 ## Release History
-
-    Nunca!
+    Console and log file being written, no options currently. 
+    
