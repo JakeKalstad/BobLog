@@ -1,5 +1,5 @@
 {
-  "name": "BogLog",
+  "name": "boblog",
   "version": "0.0.0",
   "description": "Logging package for nodejs",
   "main": "index.js",

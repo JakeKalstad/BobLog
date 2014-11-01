@@ -1,11 +1,11 @@
-BogLog
+BobLog
 =========
 
 A small library providing logging essentials
 
 ## Installation
 
-  npm install boglog
+  npm install boblog
 
 ## Usage
 
