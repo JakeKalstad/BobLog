@@ -3,7 +3,13 @@ var path = require('path');
 var email = require("mailer");
 var stackTrace = require("stack-trace/lib/stack-trace");
 var printf = require('util').format;
-function Logger (options) {
+
+function writeToConsole(msg) {
+    'use strict';
+    console.log(msg);
+}
+
+function Logger(options) {
     'use strict';
     this.options = null;
     this.formatMsg = function (msg) {
@@ -41,12 +47,12 @@ function Logger (options) {
     };
     
     this.sendEmail = function (msg) {
-        if(!this.options.smtp_recipients) {
-            console.log("No SMTP recipients defined, no emails are being sent...");
+        if (!this.options.smtp_recipients) {
+            writeToConsole("No SMTP recipients defined, no emails are being sent...");
             return;
         }
-        if(this.options.smtp_host) {
-            console.log("No SMTP host defined, no emails are being sent...");
+        if (this.options.smtp_host) {
+            writeToConsole("No SMTP host defined, no emails are being sent...");
             return;
         }
         var recipients = this.options.smtp_recipients.split(',');
@@ -65,42 +71,41 @@ function Logger (options) {
                 username : this.options.smtp_username,
                 password : this.options.smtp_password,
                 debug: this.options.debug
-            },
-            function(err, result){
-                if(err){ console.log(err); }
-            });   
+            }, function (err, result) {
+                if (err) { writeToConsole(err); }
+            });
         });
     };
     
     this.writeToFile = function (msg) {
         fs.appendFile(this.options.filePath + "/" + this.options.fileName, msg, function (err) {
             if (err) {
-                console.log(err);
+                writeToConsole(err);
             }
         });
-    }
+    };
     
     this.Log = function (msg, isError) {
         msg = this.formatMsg(msg);
-        if(!this.options) {
+        if (!this.options) {
             this.options = this.defaultOptions();
-        } 
-        if(isError) {
-            if(this.options.file_on_error) {
-                this.writeToFile("Error: " + msg);    
-            }
-            if(this.options.email_on_error) {
-                this.sendEmail(msg);   
-            }
-        } else { 
-            if(this.options.file_on_debug) {
-                this.writeToFile("Debug: " + msg);    
-            }
-            if(this.options.email_on_debug) {
-                this.sendEmail(msg);   
-            } 
         }
-        console.log(msg);
+        if (isError) {
+            if (this.options.file_on_error) {
+                this.writeToFile("Error: " + msg);
+            }
+            if (this.options.email_on_error) {
+                this.sendEmail(msg);
+            }
+        } else {
+            if (this.options.file_on_debug) {
+                this.writeToFile("Debug: " + msg);
+            }
+            if (this.options.email_on_debug) {
+                this.sendEmail(msg);
+            }
+        }
+        writeToConsole(msg);
     };
 }
 
@@ -112,27 +117,27 @@ var Log = (function () {
             if (!logger) {
                 logger = new Logger();
             }
-            if(options) {
-                logger.options = options;   
+            if (options) {
+                logger.options = options;
             }
             return logger;
         }
     };
 }());
 
-module.exports = { 
-    error : function(msg) {
-         'use strict';
-        var thistrace = stackTrace.get(); 
-        var parent_name = thistrace[1].getFunctionName(); 
-        var parent_eval = thistrace[1].getEvalOrigin(); 
+module.exports = {
+    error : function (msg) {
+        'use strict';
+        var thistrace = stackTrace.get(),
+            parent_name = thistrace[1].getFunctionName(),
+            parent_eval = thistrace[1].getEvalOrigin();
         Log.Get().Log(printf("[%s][%s]: %s", parent_eval, parent_name, msg), true);
     },
-    debug : function(msg) {
-         'use strict';
-        var thistrace = stackTrace.get(); 
-        var parent_name = thistrace[1].getFunctionName(); 
-        var parent_eval = thistrace[1].getEvalOrigin(); 
+    debug : function (msg) {
+        'use strict';
+        var thistrace = stackTrace.get(),
+            parent_name = thistrace[1].getFunctionName(),
+            parent_eval = thistrace[1].getEvalOrigin();
         Log.Get().Log(printf("[%s][%s]: %s", parent_eval, parent_name, msg));
     },
     configure : function (options) {
